@@ -3,15 +3,16 @@ extends Node2D
 @export var player: Character 
 @onready var camera: Camera2D = $DefaultPC/Camera2D
 @export var playerSpeed: float 
-var enemy_scene = preload("res://Enemy.tscn")
+var enemy_scene: PackedScene = preload("res://Enemy.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	printerr(camera.get_viewport_rect().size.x)
+	spawn_enemies_in_circle(player.position, 10, 250)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var v: Vector2 = Vector2(0,0)	
 	if Input.is_action_pressed("up"):
 		v.y = -playerSpeed
@@ -22,11 +23,12 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		v.x = playerSpeed
 	
-	player.setVelocity(v)
+	player.velocity = v
 
 
 func _on_timer_timeout() -> void:
-	spawn_enemies_in_circle(player.position, 70, 500)
+	spawn_enemies_in_circle(player.position, 10, 250)
+	
 
 func spawn_enemies_in_circle(player_position: Vector2, num_enemies: int, radius: float):
 	for i in range(num_enemies):

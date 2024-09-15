@@ -10,18 +10,18 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var velocity = Vector2(0,0)
+func _process(_delta: float) -> void:
+	var v = Vector2(0,0)
 	if playerCharacter.position.x > position.x:
-		velocity.x = speed
+		v.x = speed
 	else:
-		velocity.x = -speed
+		v.x = -speed
 		
 	if playerCharacter.position.y > position.y:
-		velocity.y = speed
+		v.y = speed
 	else: 
-		velocity.y = -speed
-	position += velocity
+		v.y = -speed
+	position += v
 
 func set_player_character(pc: Character):
 	playerCharacter = pc
