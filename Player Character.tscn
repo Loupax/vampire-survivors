@@ -1,19 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://g5vun8m7do0r"]
+[gd_scene load_steps=7 format=3 uid="uid://g5vun8m7do0r"]
 
-[ext_resource type="Texture2D" uid="uid://ub5tevq8l2sh" path="res://icon.svg" id="1_r806r"]
+[ext_resource type="Script" path="res://character.gd" id="1_hhcox"]
+[ext_resource type="Texture2D" uid="uid://qn2w4q1tlro8" path="res://guy-Sheet.png" id="1_jm552"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6tp5"]
+atlas = ExtResource("1_jm552")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfgri"]
+atlas = ExtResource("1_jm552")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nov86"]
+atlas = ExtResource("1_jm552")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_srpue"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_r806r")
+"texture": SubResource("AtlasTexture_r6tp5")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfgri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nov86")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 5.0
 }]
 
 [node name="PlayerCharacter" type="Node2D"]
+script = ExtResource("1_hhcox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_srpue")
+animation = &"idle"
