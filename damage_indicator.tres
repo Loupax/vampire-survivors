@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c7o6w4uvq215b"]
+
+[ext_resource type="FontFile" uid="uid://yd3wvtot0u6x" path="res://entities/Born2bSportyFS.otf" id="1_ta4lo"]
+
+[resource]
+default_font = ExtResource("1_ta4lo")

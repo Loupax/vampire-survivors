@@ -225,7 +225,7 @@ tile_set = SubResource("TileSet_6mapn")
 
 [node name="DefaultPC" parent="." instance=ExtResource("2_2x8yj")]
 position = Vector2(530, 288)
-health = 50
+health = 11
 
 [node name="Camera2D" type="Camera2D" parent="DefaultPC"]
 zoom = Vector2(2.04, 2.04)

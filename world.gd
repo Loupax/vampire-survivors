@@ -23,6 +23,8 @@ func _process(_delta: float) -> void:
 		v.x = -playerSpeed
 	if Input.is_action_pressed("right"):
 		v.x = playerSpeed
+	if Input.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
 	
 	player.velocity = v
 
@@ -47,14 +49,11 @@ func spawn_enemies_in_circle(player_position: Vector2, num_enemies: int, radius:
 
 func _on_default_pc_health_depleted() -> void:
 	player.hide()
+	player.set_process(false)
 	var game_over = game_over_scene.instantiate()
 	game_over.position = player.position
 	add_child(game_over)
-	
-	get_tree().paused = true
-	set_process(false) 
 	player.velocity = Vector2(0,0)
-	pass # Replace with function body.
 
 
 func _on_default_pc_damage_inflicted(who:Character, dmg:int) -> void:
@@ -74,6 +73,8 @@ func fade_out_label(label: Label, duration: float):
 	c.a = 0
 	tween.tween_property(label, "modulate", c, duration)
 	var cleanup = func():
+		if is_queued_for_deletion():
+			return
 		label.queue_free()
 		tween.kill()
 	# Optionally, queue the tween for deletion after it's finished
