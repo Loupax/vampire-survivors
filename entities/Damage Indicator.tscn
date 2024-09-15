@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhb4gp2kc47y5"]
+
+[ext_resource type="Script" path="res://entities/damage_indicator.gd" id="1_ijv2f"]
+
+[node name="Damage Indicator" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.877891, 0.125842, 9.62615e-08, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+script = ExtResource("1_ijv2f")

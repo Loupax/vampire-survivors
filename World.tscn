@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://c61evwfvt244j"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_umg2i"]
-[ext_resource type="PackedScene" uid="uid://g5vun8m7do0r" path="res://Player Character.tscn" id="2_2x8yj"]
+[ext_resource type="PackedScene" uid="uid://g5vun8m7do0r" path="res://entities/Player Character.tscn" id="2_2x8yj"]
 [ext_resource type="Texture2D" uid="uid://dhxkwojtjkufa" path="res://plains.png" id="2_xb7al"]
 [ext_resource type="Script" path="res://timer.gd" id="4_3cc2m"]
 
@@ -225,7 +225,7 @@ tile_set = SubResource("TileSet_6mapn")
 
 [node name="DefaultPC" parent="." instance=ExtResource("2_2x8yj")]
 position = Vector2(530, 288)
-health = 100
+health = 50
 
 [node name="Camera2D" type="Camera2D" parent="DefaultPC"]
 zoom = Vector2(2.04, 2.04)
@@ -235,4 +235,6 @@ wait_time = 10.0
 autostart = true
 script = ExtResource("4_3cc2m")
 
+[connection signal="damage_inflicted" from="DefaultPC" to="." method="_on_default_pc_damage_inflicted"]
+[connection signal="health_depleted" from="DefaultPC" to="." method="_on_default_pc_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,6 +1,9 @@
 class_name Character
 extends Node2D
 
+signal health_depleted
+signal damage_inflicted(who: Character, damage: int)
+
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @export var health: int
 var velocity: Vector2
@@ -22,12 +25,12 @@ func _process(_delta: float) -> void:
 	else:
 		animation.play("idle")
 		
-func get_attacked_by(h: Hurtbox):
-	health = health - h.damage
+func get_attacked_by(h: Hurtbox, dmg: int):
+	health = health - dmg
+	damage_inflicted.emit(self, dmg)
 	printerr(health)
 	if health < 0:
-		# Let the GameWorld know about this
-		queue_free()
+		health_depleted.emit()
 	
 	# Add splash
 	# Display damage

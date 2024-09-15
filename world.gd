@@ -3,11 +3,12 @@ extends Node2D
 @export var player: Character 
 @onready var camera: Camera2D = $DefaultPC/Camera2D
 @export var playerSpeed: float 
-var enemy_scene: PackedScene = preload("res://Enemy.tscn")
+var enemy_scene: PackedScene = preload("res://entities/Enemy.tscn")
+var damage_indicator_scene: PackedScene = preload("res://entities/Damage Indicator.tscn")
+var game_over_scene: PackedScene = preload("res://Game Over.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	printerr(camera.get_viewport_rect().size.x)
 	spawn_enemies_in_circle(player.position, 10, 250)
 
 
@@ -42,3 +43,39 @@ func spawn_enemies_in_circle(player_position: Vector2, num_enemies: int, radius:
 		enemy.set_player_character(player)  # Create the enemy instance
 		enemy.position = enemy_position     # Set the enemy's position
 		add_child(enemy)                   # Add the enemy to the scene
+
+
+func _on_default_pc_health_depleted() -> void:
+	player.hide()
+	var game_over = game_over_scene.instantiate()
+	game_over.position = player.position
+	add_child(game_over)
+	
+	get_tree().paused = true
+	set_process(false) 
+	player.velocity = Vector2(0,0)
+	pass # Replace with function body.
+
+
+func _on_default_pc_damage_inflicted(who:Character, dmg:int) -> void:
+	var damage_indicator: Label = damage_indicator_scene.instantiate()
+	damage_indicator.text = "%s" % dmg 
+	damage_indicator.position = who.position
+	add_child(damage_indicator)
+	
+	
+	fade_out_label(damage_indicator, 1)
+	pass # Replace with function body.
+
+func fade_out_label(label: Label, duration: float):
+	var tween = get_tree().create_tween()
+	# Animate the label's modulate property from its current value to fully transparent
+	var c = label.modulate
+	c.a = 0
+	tween.tween_property(label, "modulate", c, duration)
+	var cleanup = func():
+		label.queue_free()
+		tween.kill()
+	# Optionally, queue the tween for deletion after it's finished
+	tween.tween_callback(cleanup)
+	
