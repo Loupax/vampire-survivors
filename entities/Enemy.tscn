@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkp3sipi1h1b3"]
+[gd_scene load_steps=8 format=3 uid="uid://dkp3sipi1h1b3"]
 
 [ext_resource type="Script" path="res://entities/enemy.gd" id="1_r4y26"]
 [ext_resource type="Texture2D" uid="uid://ub5tevq8l2sh" path="res://icon.svg" id="1_vtxqd"]
 [ext_resource type="PackedScene" uid="uid://34kltakqp7bx" path="res://collisions/Hurtbox.tscn" id="3_ssfxc"]
+[ext_resource type="PackedScene" uid="uid://dqmd57uqgaeu7" path="res://collisions/Hitbox.tscn" id="4_0hn11"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y5q6e"]
 animations = [{
@@ -18,8 +19,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_opgub"]
 size = Vector2(6.5, 6.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymrt4"]
+size = Vector2(8, 8)
+
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_r4y26")
+maxHealth = 10
+health = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.07, 0.07)
@@ -31,4 +37,11 @@ collision_layer = 2
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_opgub")
 
+[node name="Hitbox" parent="." instance=ExtResource("4_0hn11")]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_ymrt4")
+
 [editable path="Hurtbox"]
+[editable path="Hitbox"]

@@ -42,10 +42,14 @@ func spawn_enemies_in_circle(player_position: Vector2, num_enemies: int, radius:
 		)
 		
 		var enemy = enemy_scene.instantiate()
-		enemy.set_player_character(player)  # Create the enemy instance
+		enemy.set_player_character(player)
+		enemy.connect("damage_inflicted", _on_default_pc_damage_inflicted)
+		enemy.connect("health_depleted", _on_enemy_health_depleted)  # Create the enemy instance
 		enemy.position = enemy_position     # Set the enemy's position
 		add_child(enemy)                   # Add the enemy to the scene
 
+func _on_enemy_health_depleted(who: Character) -> void:
+	who.queue_free()
 
 func _on_default_pc_health_depleted() -> void:
 	player.hide()

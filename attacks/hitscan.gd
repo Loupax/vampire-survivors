@@ -1,7 +1,7 @@
 class_name HitscanAttack
 extends Node2D
 @onready var animation:AnimatedSprite2D = $AnimatedSprite2D
-@onready var ray:RayCast2D = $RayCast2D
+@onready var ray:ShapeCast2D = $ShapeCast2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Hide the sprite initially
@@ -25,21 +25,30 @@ func _on_timer_timeout() -> void:
 	animation.show()
 	animation.play("default")
 	printerr("Collision check running", ray.is_colliding())
-	if ray.is_colliding():
-		printerr("Colliding ", get_hit_areas())
+	hit_enemies()
 	pass # Replace with function body.
 
-func get_hit_areas() -> Array[Enemy]:
-	#ray is your RayCast2D node.
-	var objects_collide:Array[Area2D] = [] #The colliding objects go here.
-	var enemies:Array[Enemy]
+func hit_enemies():
+	var colls = []
+	ray.force_shapecast_update()  # Ensure the ShapeCast2D is updated before checking collisions
+	
 	while ray.is_colliding():
-		var obj = ray.get_collider() #get the next object that is colliding.
-		objects_collide.append( obj ) #add it to the array.
-		ray.add_exception( obj ) #add to ray's exception. That way it could detect something being behind it.
-		ray.force_raycast_update() #update the ray's collision query.
+		# Loop over the colliders
+		for i in range(ray.get_collision_count()):
+			var obj = ray.get_collider(i)
+			if obj in colls:
+				continue  # Skip already processed colliders
+			colls.append(obj)
+			printerr("Collider: ", obj, " Parent: ", obj.get_parent())
+			
+			obj.get_parent().get_attacked_by(null, randi_range(1, 4) + 1)
 
-	for obj in objects_collide:
-		ray.remove_exception( obj )
-		enemies.append(obj.get_parent())
-	return enemies
+		# Add all processed colliders to the exception list
+		for o in colls:
+			ray.add_exception(o)
+		
+		ray.force_shapecast_update()  # Update the ShapeCast2D after adding exceptions
+
+	# Clean up by removing all exceptions added earlier
+	for o in colls:
+		ray.remove_exception(o)
