@@ -2,12 +2,7 @@ class_name Enemy
 extends Character
 
 @export var playerCharacter: Character
-@export var speed: float = 0.2
-	
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
+@export var speed: float = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -21,7 +16,7 @@ func _process(_delta: float) -> void:
 		v.y = speed
 	else: 
 		v.y = -speed
-	position += v
+	velocity = v
 
 func set_player_character(pc: Character):
 	playerCharacter = pc

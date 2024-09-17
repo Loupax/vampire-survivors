@@ -1,9 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkp3sipi1h1b3"]
+[gd_scene load_steps=9 format=3 uid="uid://dkp3sipi1h1b3"]
 
 [ext_resource type="Script" path="res://entities/enemy.gd" id="1_r4y26"]
 [ext_resource type="Texture2D" uid="uid://ub5tevq8l2sh" path="res://icon.svg" id="1_vtxqd"]
 [ext_resource type="PackedScene" uid="uid://34kltakqp7bx" path="res://collisions/Hurtbox.tscn" id="3_ssfxc"]
 [ext_resource type="PackedScene" uid="uid://dqmd57uqgaeu7" path="res://collisions/Hitbox.tscn" id="4_0hn11"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gsxly"]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opgub"]
+size = Vector2(6.5, 6.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymrt4"]
+size = Vector2(8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y5q6e"]
 animations = [{
@@ -16,20 +26,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_opgub"]
-size = Vector2(6.5, 6.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymrt4"]
-size = Vector2(8, 8)
-
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_r4y26")
+speed = 25.0
 maxHealth = 10
 health = 10
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.07, 0.07)
-sprite_frames = SubResource("SpriteFrames_y5q6e")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_gsxly")
+debug_color = Color(0.98092, 0, 0.375551, 0.42)
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_ssfxc")]
 collision_layer = 2
@@ -42,6 +47,10 @@ collision_layer = 2
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("RectangleShape2D_ymrt4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.07, 0.07)
+sprite_frames = SubResource("SpriteFrames_y5q6e")
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

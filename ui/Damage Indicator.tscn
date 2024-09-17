@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhb4gp2kc47y5"]
 
-[ext_resource type="Script" path="res://entities/damage_indicator.gd" id="1_ijv2f"]
+[ext_resource type="Script" path="res://ui/damage_indicator.gd" id="1_ijv2f"]
 [ext_resource type="Theme" uid="uid://c7o6w4uvq215b" path="res://damage_indicator.tres" id="1_muprf"]
 
 [node name="Damage Indicator" type="Label"]
 offset_right = 40.0
 offset_bottom = 23.0
 theme = ExtResource("1_muprf")
-theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
 theme_override_constants/outline_size = 4
 text = "The quick brown fox jumps over the lazy dog"
 script = ExtResource("1_ijv2f")

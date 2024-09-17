@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ck75hkbwddfc2"]
 
-[ext_resource type="Script" path="res://entities/healthbar.gd" id="1_eac1v"]
+[ext_resource type="Script" path="res://ui/healthbar.gd" id="1_eac1v"]
 
 [node name="Node2D" type="Node2D"]
 

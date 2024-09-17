@@ -1,27 +1,43 @@
-[gd_scene load_steps=10 format=3 uid="uid://g5vun8m7do0r"]
+[gd_scene load_steps=15 format=3 uid="uid://g5vun8m7do0r"]
 
-[ext_resource type="Script" path="res://entities/character.gd" id="1_hhcox"]
-[ext_resource type="Texture2D" uid="uid://qn2w4q1tlro8" path="res://guy-Sheet.png" id="1_jm552"]
+[ext_resource type="Script" path="res://entities/player_character.gd" id="1_76s61"]
+[ext_resource type="Texture2D" uid="uid://3dtvhnrekt2" path="res://entities/baby_dragon/outline/IDLE.png" id="2_gqnqk"]
+[ext_resource type="Texture2D" uid="uid://4wwbuyovdqsq" path="res://entities/baby_dragon/outline/MOVE.png" id="2_s1doq"]
 [ext_resource type="PackedScene" uid="uid://dqmd57uqgaeu7" path="res://collisions/Hitbox.tscn" id="3_pem7a"]
 [ext_resource type="PackedScene" uid="uid://cau0g8el71wd7" path="res://attacks/hitscan.tscn" id="4_plypo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r6tp5"]
-atlas = ExtResource("1_jm552")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_myydx"]
+atlas = ExtResource("2_gqnqk")
+region = Rect2(0, 0, 158, 125)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cfgri"]
-atlas = ExtResource("1_jm552")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_46vki"]
+atlas = ExtResource("2_gqnqk")
+region = Rect2(158, 0, 158, 125)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nov86"]
-atlas = ExtResource("1_jm552")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8w53"]
+atlas = ExtResource("2_s1doq")
+region = Rect2(0, 0, 158, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cueq5"]
+atlas = ExtResource("2_s1doq")
+region = Rect2(158, 0, 158, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byosm"]
+atlas = ExtResource("2_s1doq")
+region = Rect2(316, 0, 158, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vc6o"]
+atlas = ExtResource("2_s1doq")
+region = Rect2(474, 0, 158, 125)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_srpue"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r6tp5")
+"texture": SubResource("AtlasTexture_myydx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46vki")
 }],
 "loop": true,
 "name": &"idle",
@@ -29,10 +45,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cfgri")
+"texture": SubResource("AtlasTexture_b8w53")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nov86")
+"texture": SubResource("AtlasTexture_cueq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byosm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vc6o")
 }],
 "loop": true,
 "name": &"walk",
@@ -40,26 +62,35 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4dba"]
-size = Vector2(6, 23)
+size = Vector2(24, 36)
 
-[node name="PlayerCharacter" type="Node2D"]
-script = ExtResource("1_hhcox")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jrhl0"]
+radius = 7.0
+height = 32.0
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_76s61")
+speed = 50.0
 maxHealth = 10
+health = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3, 0)
+self_modulate = Color(1, 0.56, 0.56, 1)
+position = Vector2(2, -18)
 sprite_frames = SubResource("SpriteFrames_srpue")
 animation = &"idle"
+metadata/_edit_lock_ = true
 
 [node name="WaterSlash" parent="AnimatedSprite2D" instance=ExtResource("4_plypo")]
-position = Vector2(75, -13)
-scale = Vector2(0.31, 0.31)
+position = Vector2(-94, -7)
+scale = Vector2(-0.31, 0.31)
 
 [node name="Hitbox" parent="." instance=ExtResource("3_pem7a")]
-position = Vector2(-3, 0)
+position = Vector2(-10, -8)
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(1, 2)
+position = Vector2(10, 8)
 shape = SubResource("RectangleShape2D_l4dba")
 
 [node name="HealthTotal" type="ColorRect" parent="."]
@@ -75,5 +106,9 @@ offset_top = -20.0
 offset_right = 4.0
 offset_bottom = -17.0
 color = Color(0, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jrhl0")
+metadata/_edit_lock_ = true
 
 [editable path="Hitbox"]

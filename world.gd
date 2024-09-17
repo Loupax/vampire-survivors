@@ -2,9 +2,8 @@ extends Node2D
 
 @export var player: Character 
 @onready var camera: Camera2D = $DefaultPC/Camera2D
-@export var playerSpeed: float 
-var enemy_scene: PackedScene = preload("res://entities/Enemy.tscn")
-var damage_indicator_scene: PackedScene = preload("res://entities/Damage Indicator.tscn")
+var enemy_scene: PackedScene = preload("res://entities/goblin/goblin.tscn")#preload("res://entities/Enemy.tscn")
+var damage_indicator_scene: PackedScene = preload("res://ui/Damage Indicator.tscn")
 var game_over_scene: PackedScene = preload("res://Game Over.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -14,19 +13,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	var v: Vector2 = Vector2(0,0)	
-	if Input.is_action_pressed("up"):
-		v.y = -playerSpeed
-	if Input.is_action_pressed("down"):
-		v.y = playerSpeed
-	if Input.is_action_pressed("left"):
-		v.x = -playerSpeed
-	if Input.is_action_pressed("right"):
-		v.x = playerSpeed
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
-	
-	player.velocity = v
 
 
 func _on_timer_timeout() -> void:
@@ -51,7 +39,7 @@ func spawn_enemies_in_circle(player_position: Vector2, num_enemies: int, radius:
 func _on_enemy_health_depleted(who: Character) -> void:
 	who.queue_free()
 
-func _on_default_pc_health_depleted() -> void:
+func _on_default_pc_health_depleted(who: Character) -> void:
 	player.hide()
 	player.set_process(false)
 	var game_over = game_over_scene.instantiate()
@@ -65,14 +53,10 @@ func _on_default_pc_damage_inflicted(who:Character, dmg:int) -> void:
 	damage_indicator.text = "%s" % dmg 
 	damage_indicator.position = who.position
 	add_child(damage_indicator)
-	
-	
 	fade_out_label(damage_indicator, 1)
-	pass # Replace with function body.
 
 func fade_out_label(label: Label, duration: float):
 	var tween = get_tree().create_tween()
-	# Animate the label's modulate property from its current value to fully transparent
 	var c = label.modulate
 	c.a = 0
 	tween.tween_property(label, "modulate", c, duration)
@@ -81,6 +65,5 @@ func fade_out_label(label: Label, duration: float):
 			return
 		label.queue_free()
 		tween.kill()
-	# Optionally, queue the tween for deletion after it's finished
 	tween.tween_callback(cleanup)
 	
