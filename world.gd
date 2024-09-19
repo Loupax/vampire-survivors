@@ -2,7 +2,8 @@ extends Node2D
 
 @export var player: Character 
 @onready var camera: Camera2D = $DefaultPC/Camera2D
-var enemy_scene: PackedScene = preload("res://entities/goblin/goblin.tscn")#preload("res://entities/Enemy.tscn")
+@onready var xp_indicator: Label = $"../CanvasLayer/UI/VBoxContainer/Label"
+var enemy_scene: PackedScene = preload("res://entities/goblin/goblin.tscn")
 var damage_indicator_scene: PackedScene = preload("res://ui/Damage Indicator.tscn")
 var game_over_scene: PackedScene = preload("res://Game Over.tscn")
 
@@ -13,6 +14,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	xp_indicator.text = "XP: %d" % player.xp
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
 
@@ -37,7 +39,14 @@ func spawn_enemies_in_circle(player_position: Vector2, num_enemies: int, radius:
 		add_child(enemy)                   # Add the enemy to the scene
 
 func _on_enemy_health_depleted(who: Character) -> void:
+	var enemy = who as Enemy
 	who.queue_free()
+	var loot = enemy.drop_loot()
+	if loot != null:
+		loot.position = who.position
+		add_child(loot)
+	
+	
 
 func _on_default_pc_health_depleted(who: Character) -> void:
 	player.hide()

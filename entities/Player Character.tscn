@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://g5vun8m7do0r"]
+[gd_scene load_steps=17 format=3 uid="uid://g5vun8m7do0r"]
 
 [ext_resource type="Script" path="res://entities/player_character.gd" id="1_76s61"]
 [ext_resource type="Texture2D" uid="uid://3dtvhnrekt2" path="res://entities/baby_dragon/outline/IDLE.png" id="2_gqnqk"]
@@ -68,6 +68,11 @@ size = Vector2(24, 36)
 radius = 7.0
 height = 32.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tou4a"]
+radius = 67.0075
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_761wd"]
+
 [node name="PlayerCharacter" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource("1_76s61")
@@ -107,8 +112,26 @@ offset_right = 4.0
 offset_bottom = -17.0
 color = Color(0, 1, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jrhl0")
 metadata/_edit_lock_ = true
+
+[node name="LootAttractor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="LootAttractorShape" type="CollisionShape2D" parent="LootAttractor"]
+shape = SubResource("CircleShape2D_tou4a")
+debug_color = Color(0.84201, 0.258465, 0.704658, 0.42)
+
+[node name="LootCollector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="LootCollectorShape" type="CollisionShape2D" parent="LootCollector"]
+shape = SubResource("CircleShape2D_761wd")
+
+[connection signal="area_entered" from="LootAttractor" to="." method="_on_loot_attractor_area_entered"]
+[connection signal="area_entered" from="LootCollector" to="." method="_on_loot_collector_area_entered"]
 
 [editable path="Hitbox"]
