@@ -78,7 +78,7 @@ collision_mask = 0
 script = ExtResource("1_76s61")
 speed = 50.0
 maxHealth = 10
-health = 10
+health = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0.56, 0.56, 1)
@@ -87,9 +87,10 @@ sprite_frames = SubResource("SpriteFrames_srpue")
 animation = &"idle"
 metadata/_edit_lock_ = true
 
-[node name="WaterSlash" parent="AnimatedSprite2D" instance=ExtResource("4_plypo")]
+[node name="WaterSlash" parent="AnimatedSprite2D" node_paths=PackedStringArray("attacker") instance=ExtResource("4_plypo")]
 position = Vector2(-94, -7)
 scale = Vector2(-0.31, 0.31)
+attacker = NodePath("../..")
 
 [node name="Hitbox" parent="." instance=ExtResource("3_pem7a")]
 position = Vector2(-10, -8)

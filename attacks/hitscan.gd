@@ -2,6 +2,7 @@ class_name HitscanAttack
 extends Node2D
 @onready var animation:AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray:ShapeCast2D = $ShapeCast2D
+@export var attacker:Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Hide the sprite initially
@@ -29,7 +30,7 @@ func hit_enemies():
 		for i in range(ray.get_collision_count()):
 			var obj = ray.get_collider(i)
 			colls.append(obj)
-			obj.get_parent().get_attacked_by(null, randi_range(1, 4) + 1)
+			obj.get_parent().resolve_attack(attacker, obj.get_parent(),randi_range(3, 5) + 1)
 
 		for o in colls:
 			ray.add_exception(o)

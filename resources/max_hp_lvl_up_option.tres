@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://lqbbhbe2d6ef"]
+
+[sub_resource type="GDScript" id="GDScript_lar13"]
+script/source = "extends LevelUpOption
+
+func level_up(who:Character):
+	who.maxHealth += 10
+"
+
+[resource]
+script = SubResource("GDScript_lar13")
+name = "+10 Max HP"

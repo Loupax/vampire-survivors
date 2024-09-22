@@ -3,7 +3,7 @@ extends Character
 
 @export var speed: float 
 signal level_up(who: PlayerCharacter)
-var xp: int = 0
+@export var xp: int = 4
 var xp_till_next_level: int = 0
 var level: int = 1
 
@@ -24,16 +24,16 @@ func _process(delta: float) -> void:
 	velocity = v
 	$Health.scale.x = float(health)/float(maxHealth)
 
-func get_required_xp(level):
-	assert(level > 1, "Level must be over one")
-	if level == 2:
+func get_required_xp(lvl):
+	assert(lvl > 1, "Level must be over one")
+	if lvl == 2:
 		return 5
-	elif level >= 2 and level <= 20:
-		return 5 + 10 * (level - 1)
-	elif level >= 21 and level <= 40:
-		return 195 + 13 * (level - 20)
-	elif level >= 41:
-		return 455 + 16 * (level - 40)
+	elif lvl >= 2 and lvl <= 20:
+		return 5 + 10 * (lvl - 1)
+	elif lvl >= 21 and lvl <= 40:
+		return 195 + 13 * (lvl - 20)
+	elif lvl >= 41:
+		return 455 + 16 * (lvl - 40)
 	else:
 		return 0  # Handle invalid levels if necessary
 		

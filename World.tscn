@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://c61evwfvt244j"]
+[gd_scene load_steps=6 format=4 uid="uid://c61evwfvt244j"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_umg2i"]
 [ext_resource type="PackedScene" uid="uid://g5vun8m7do0r" path="res://entities/Player Character.tscn" id="2_2x8yj"]
 [ext_resource type="Texture2D" uid="uid://dhxkwojtjkufa" path="res://plains.png" id="2_xb7al"]
-[ext_resource type="FontFile" uid="uid://yd3wvtot0u6x" path="res://entities/Born2bSportyFS.otf" id="4_3sbcs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wmo60"]
 texture = ExtResource("2_xb7al")
@@ -259,11 +258,9 @@ offset_bottom = -12.0
 [node name="Label" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3sbcs")
-theme_override_font_sizes/font_size = 50
 text = "XP: 0"
 
 [connection signal="damage_inflicted" from="World/Node2D/DefaultPC" to="World" method="_on_default_pc_damage_inflicted"]
 [connection signal="health_depleted" from="World/Node2D/DefaultPC" to="World" method="_on_default_pc_health_depleted"]
+[connection signal="level_up" from="World/Node2D/DefaultPC" to="World" method="_on_default_pc_level_up"]
 [connection signal="timeout" from="World/Timer" to="World" method="_on_timer_timeout"]

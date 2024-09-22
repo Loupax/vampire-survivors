@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://g1g7cm5ud8qv"]
+
+[ext_resource type="Script" path="res://ui/level_up/level_up_button.gd" id="1_udy7s"]
+
+[node name="Button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_udy7s")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

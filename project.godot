@@ -15,6 +15,11 @@ run/main_scene="res://World.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[gui]
+
+theme/custom="res://theme.tres"
+theme/custom_font="res://entities/Born2bSportyFS.otf"
+
 [input]
 
 up={

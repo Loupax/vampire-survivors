@@ -1,10 +1,11 @@
 extends Node2D
 
 @export var player: Character 
-@onready var camera: Camera2D = $DefaultPC/Camera2D
 @onready var xp_indicator: Label = $"../CanvasLayer/UI/VBoxContainer/Label"
+@onready var ui_scene = $"../CanvasLayer/UI"
 var enemy_scene: PackedScene = preload("res://entities/goblin/goblin.tscn")
 var damage_indicator_scene: PackedScene = preload("res://ui/Damage Indicator.tscn")
+var level_up_scene: PackedScene = preload("res://ui/level_up_screen.tscn")
 var game_over_scene: PackedScene = preload("res://Game Over.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -78,3 +79,21 @@ func fade_out_label(label: Label, duration: float):
 		tween.kill()
 	tween.tween_callback(cleanup)
 	
+func _pause():
+	process_mode = PROCESS_MODE_DISABLED
+	
+func _unpause():
+	process_mode = PROCESS_MODE_INHERIT
+	
+func _on_default_pc_level_up(who: PlayerCharacter) -> void:
+	call_deferred("_pause")
+	
+	var level_up = level_up_scene.instantiate()
+	ui_scene.add_child(level_up)
+	level_up.connect("level_up_option_selected",  _on_level_up_option_selected)
+
+func _on_level_up_option_selected(what:LevelUpOption, ui:CanvasLayer):
+	call_deferred("_unpause")
+	
+	what.level_up(player)
+	ui.queue_free()

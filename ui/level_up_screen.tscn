@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://w4qqa6c8lhf3"]
+
+[ext_resource type="Script" path="res://ui/level_up_screen.gd" id="1_byjhf"]
+[ext_resource type="PackedScene" uid="uid://g1g7cm5ud8qv" path="res://ui/level_up/LevelUpButton.tscn" id="2_aa66p"]
+[ext_resource type="Script" path="res://resources/level_up_option.gd" id="3_jkoi3"]
+[ext_resource type="Resource" uid="uid://cbwhf87t21we1" path="res://resources/attack_lvl_up_option.tres" id="3_tcxkk"]
+
+[sub_resource type="Resource" id="Resource_xfblt"]
+script = ExtResource("3_jkoi3")
+name = "+1 Def"
+
+[sub_resource type="Resource" id="Resource_u8klg"]
+script = ExtResource("3_jkoi3")
+name = "+10 Max HP"
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_byjhf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSpacer Header" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="ss" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/ss"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ss"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ss/PanelContainer"]
+layout_mode = 2
+
+[node name="Header label" type="Label" parent="VBoxContainer/ss/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Level Up!
+"
+
+[node name="Control" type="Control" parent="VBoxContainer/ss/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="+1p Atk btn" parent="VBoxContainer/ss/PanelContainer/VBoxContainer" instance=ExtResource("2_aa66p")]
+layout_mode = 2
+level_up_option = ExtResource("3_tcxkk")
+
+[node name="+1 Def btn" parent="VBoxContainer/ss/PanelContainer/VBoxContainer" instance=ExtResource("2_aa66p")]
+layout_mode = 2
+level_up_option = SubResource("Resource_xfblt")
+
+[node name="+10 Max HP btn" parent="VBoxContainer/ss/PanelContainer/VBoxContainer" instance=ExtResource("2_aa66p")]
+layout_mode = 2
+size_flags_vertical = 4
+level_up_option = SubResource("Resource_u8klg")
+
+[node name="Spacer" type="Control" parent="VBoxContainer/ss"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="VSpacer Footer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[connection signal="level_up_option_selected" from="." to="." method="_on_level_up_option_selected"]
+[connection signal="level_up_option_selected" from="VBoxContainer/ss/PanelContainer/VBoxContainer/+1p Atk btn" to="." method="_on_level_up_option_selected"]
+[connection signal="level_up_option_selected" from="VBoxContainer/ss/PanelContainer/VBoxContainer/+1 Def btn" to="." method="_on_level_up_option_selected"]
+[connection signal="level_up_option_selected" from="VBoxContainer/ss/PanelContainer/VBoxContainer/+10 Max HP btn" to="." method="_on_level_up_option_selected"]
