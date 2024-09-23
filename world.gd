@@ -2,16 +2,17 @@ extends Node2D
 
 @export var player: Character 
 @onready var xp_indicator: Label = $"../CanvasLayer/UI/VBoxContainer/Label"
-@onready var ui_scene = $"../CanvasLayer/UI"
+
 var enemy_scene: PackedScene = preload("res://entities/goblin/goblin.tscn")
 var damage_indicator_scene: PackedScene = preload("res://ui/Damage Indicator.tscn")
-var level_up_scene: PackedScene = preload("res://ui/level_up_screen.tscn")
+@onready var level_up_ui: LevelUpScreen = %LevelUpScreen
 var game_over_scene: PackedScene = preload("res://Game Over.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player.xp = 4
 	spawn_enemies_in_circle(player.position, 10, 250)
+	GlobalSignals.connect("level_up_option_selected", _on_level_up_screen_level_up_option_selected)
 
 
 
@@ -87,13 +88,11 @@ func _unpause():
 	
 func _on_default_pc_level_up(who: PlayerCharacter) -> void:
 	call_deferred("_pause")
-	
-	var level_up = level_up_scene.instantiate()
-	ui_scene.add_child(level_up)
-	level_up.connect("level_up_option_selected",  _on_level_up_option_selected)
+	level_up_ui.show()
+		
 
-func _on_level_up_option_selected(what:LevelUpOption, ui:CanvasLayer):
+func _on_level_up_screen_level_up_option_selected(o: LevelUpOption) -> void:
 	call_deferred("_unpause")
 	
-	what.level_up(player)
-	ui.queue_free()
+	o.level_up(player)
+	level_up_ui.hide()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://c61evwfvt244j"]
+[gd_scene load_steps=7 format=4 uid="uid://c61evwfvt244j"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_umg2i"]
 [ext_resource type="PackedScene" uid="uid://g5vun8m7do0r" path="res://entities/Player Character.tscn" id="2_2x8yj"]
 [ext_resource type="Texture2D" uid="uid://dhxkwojtjkufa" path="res://plains.png" id="2_xb7al"]
+[ext_resource type="PackedScene" uid="uid://w4qqa6c8lhf3" path="res://ui/level_up_screen.tscn" id="4_ygtfm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wmo60"]
 texture = ExtResource("2_xb7al")
@@ -236,6 +237,19 @@ wait_time = 5.0
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelUpScreen" parent="CanvasLayer" instance=ExtResource("4_ygtfm")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3

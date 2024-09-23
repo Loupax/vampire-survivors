@@ -7,4 +7,4 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	emit_signal("level_up_option_selected", level_up_option)
+	GlobalSignals.emit_signal("level_up_option_selected", level_up_option)
