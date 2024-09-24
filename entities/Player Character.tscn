@@ -81,7 +81,6 @@ maxHealth = 10
 health = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-self_modulate = Color(1, 0.56, 0.56, 1)
 position = Vector2(2, -18)
 sprite_frames = SubResource("SpriteFrames_srpue")
 animation = &"idle"

@@ -11,7 +11,7 @@ var game_over_scene: PackedScene = preload("res://Game Over.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player.xp = 4
-	spawn_enemies_in_circle(player.position, 10, 250)
+	spawn_enemies_in_circle(player.position, 10, 422)
 	GlobalSignals.connect("level_up_option_selected", _on_level_up_screen_level_up_option_selected)
 
 
@@ -19,12 +19,18 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	xp_indicator.text = "LVL:%d XP: %d/%d" % [player.level, player.xp, player.xp_till_next_level]
+	
+	if Input.is_action_just_pressed("pause_toggle"):
+		if process_mode == PROCESS_MODE_DISABLED:
+			call_deferred("_unpause")
+		else:
+			call_deferred("_pause")
 	if Input.is_action_pressed("restart"):
 		get_tree().reload_current_scene()
 
 
 func _on_timer_timeout() -> void:
-	spawn_enemies_in_circle(player.position, 10, 250)
+	spawn_enemies_in_circle(player.position, 10, 422)
 	
 
 func spawn_enemies_in_circle(player_position: Vector2, num_enemies: int, radius: float):

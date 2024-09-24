@@ -230,7 +230,7 @@ tile_set = SubResource("TileSet_6mapn")
 position = Vector2(283, 159)
 
 [node name="Camera2D" type="Camera2D" parent="World/Node2D/DefaultPC"]
-zoom = Vector2(2.04, 2.04)
+scale = Vector2(0.80896, 1.06768)
 
 [node name="Timer" type="Timer" parent="World"]
 wait_time = 5.0

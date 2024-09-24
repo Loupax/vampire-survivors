@@ -1,17 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://w4qqa6c8lhf3"]
+[gd_scene load_steps=6 format=3 uid="uid://w4qqa6c8lhf3"]
 
 [ext_resource type="Script" path="res://ui/level_up_screen.gd" id="1_byjhf"]
 [ext_resource type="PackedScene" uid="uid://g1g7cm5ud8qv" path="res://ui/level_up/LevelUpButton.tscn" id="2_aa66p"]
-[ext_resource type="Script" path="res://resources/level_up_option.gd" id="3_jkoi3"]
 [ext_resource type="Resource" uid="uid://cbwhf87t21we1" path="res://resources/attack_lvl_up_option.tres" id="3_tcxkk"]
-
-[sub_resource type="Resource" id="Resource_xfblt"]
-script = ExtResource("3_jkoi3")
-name = "+1 Def"
-
-[sub_resource type="Resource" id="Resource_u8klg"]
-script = ExtResource("3_jkoi3")
-name = "+10 Max HP"
+[ext_resource type="Resource" uid="uid://btkxfrxppsupr" path="res://resources/defence_lvl_up_option.tres" id="4_crv0y"]
+[ext_resource type="Resource" uid="uid://lqbbhbe2d6ef" path="res://resources/max_hp_lvl_up_option.tres" id="5_s4ffh"]
 
 [node name="CanvasLayer" type="Control"]
 layout_mode = 3
@@ -63,12 +56,12 @@ level_up_option = ExtResource("3_tcxkk")
 
 [node name="+1 Def btn" parent="VBoxContainer/ss/PanelContainer/VBoxContainer" instance=ExtResource("2_aa66p")]
 layout_mode = 2
-level_up_option = SubResource("Resource_xfblt")
+level_up_option = ExtResource("4_crv0y")
 
 [node name="+10 Max HP btn" parent="VBoxContainer/ss/PanelContainer/VBoxContainer" instance=ExtResource("2_aa66p")]
 layout_mode = 2
 size_flags_vertical = 4
-level_up_option = SubResource("Resource_u8klg")
+level_up_option = ExtResource("5_s4ffh")
 
 [node name="Spacer" type="Control" parent="VBoxContainer/ss"]
 layout_mode = 2

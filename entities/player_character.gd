@@ -12,16 +12,28 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	var v: Vector2 = Vector2(0,0)	
+	
+	var v: Vector2 = Vector2(0, 0)
+	
 	if Input.is_action_pressed("up"):
-		v.y = -speed
+		v.y -= speed
 	if Input.is_action_pressed("down"):
-		v.y = speed
+		v.y += speed
 	if Input.is_action_pressed("left"):
-		v.x = -speed
+		v.x -= speed
 	if Input.is_action_pressed("right"):
-		v.x = speed
-	velocity = v
+		v.x += speed
+
+	# Normalize the velocity to prevent faster diagonal movement
+	if v.length() > 0:
+		v = v.normalized() * speed
+
+	# Apply frame-rate independent movement
+	velocity = v * delta
+	
+	# Update the position
+	position += velocity
+
 	$Health.scale.x = float(health)/float(maxHealth)
 
 func get_required_xp(lvl):
