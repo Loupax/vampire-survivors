@@ -11,12 +11,4 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if player != null:
-		if position.x > player.position.x:
-			position.x -= speed
-		else: if position.x < player.position.x:
-			position.x += speed
-			
-		if position.y > player.position.y:
-			position.y -= speed
-		else: if position.y < player.position.y:
-			position.y += speed
+		position = position.move_toward(player.position, speed)
