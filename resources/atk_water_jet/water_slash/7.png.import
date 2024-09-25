@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c85675bw4r37l"
-path="res://.godot/imported/4.png-c243ad8e9196f7e6a42314daaf6b3a3c.ctex"
+uid="uid://c8ol7paeevfps"
+path="res://.godot/imported/7.png-29338a0b8cd37d6cc04f16a275735338.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://attacks/water_slash/4.png"
-dest_files=["res://.godot/imported/4.png-c243ad8e9196f7e6a42314daaf6b3a3c.ctex"]
+source_file="res://resources/atk_water_jet/water_slash/7.png"
+dest_files=["res://.godot/imported/7.png-29338a0b8cd37d6cc04f16a275735338.ctex"]
 
 [params]
 

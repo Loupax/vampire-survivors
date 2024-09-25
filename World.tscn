@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://c61evwfvt244j"]
+[gd_scene load_steps=8 format=4 uid="uid://c61evwfvt244j"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_umg2i"]
 [ext_resource type="PackedScene" uid="uid://g5vun8m7do0r" path="res://entities/Player Character.tscn" id="2_2x8yj"]
 [ext_resource type="Texture2D" uid="uid://dhxkwojtjkufa" path="res://plains.png" id="2_xb7al"]
+[ext_resource type="PackedScene" uid="uid://syy2iiw2rdcr" path="res://entities/collectibles/xp_collectible.tscn" id="4_vgtuh"]
 [ext_resource type="PackedScene" uid="uid://w4qqa6c8lhf3" path="res://ui/level_up_screen.tscn" id="4_ygtfm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wmo60"]
@@ -234,7 +235,9 @@ scale = Vector2(0.80896, 1.06768)
 
 [node name="Timer" type="Timer" parent="World"]
 wait_time = 5.0
-autostart = true
+
+[node name="XPCollectible" parent="World" instance=ExtResource("4_vgtuh")]
+position = Vector2(108, 170)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

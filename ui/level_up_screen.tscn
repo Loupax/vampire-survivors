@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://w4qqa6c8lhf3"]
+[gd_scene load_steps=7 format=3 uid="uid://w4qqa6c8lhf3"]
 
 [ext_resource type="Script" path="res://ui/level_up_screen.gd" id="1_byjhf"]
 [ext_resource type="PackedScene" uid="uid://g1g7cm5ud8qv" path="res://ui/level_up/LevelUpButton.tscn" id="2_aa66p"]
 [ext_resource type="Resource" uid="uid://cbwhf87t21we1" path="res://resources/attack_lvl_up_option.tres" id="3_tcxkk"]
 [ext_resource type="Resource" uid="uid://btkxfrxppsupr" path="res://resources/defence_lvl_up_option.tres" id="4_crv0y"]
 [ext_resource type="Resource" uid="uid://lqbbhbe2d6ef" path="res://resources/max_hp_lvl_up_option.tres" id="5_s4ffh"]
+[ext_resource type="Resource" uid="uid://dw02qo5oxy5xc" path="res://resources/atk_water_jet/water_jet.tres" id="6_1kk05"]
 
 [node name="CanvasLayer" type="Control"]
 layout_mode = 3
@@ -63,6 +64,11 @@ layout_mode = 2
 size_flags_vertical = 4
 level_up_option = ExtResource("5_s4ffh")
 
+[node name="Water Jet" parent="VBoxContainer/ss/PanelContainer/VBoxContainer" instance=ExtResource("2_aa66p")]
+layout_mode = 2
+size_flags_vertical = 4
+level_up_option = ExtResource("6_1kk05")
+
 [node name="Spacer" type="Control" parent="VBoxContainer/ss"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -76,3 +82,4 @@ size_flags_stretch_ratio = 0.25
 [connection signal="level_up_option_selected" from="VBoxContainer/ss/PanelContainer/VBoxContainer/+1p Atk btn" to="." method="_on_level_up_option_selected"]
 [connection signal="level_up_option_selected" from="VBoxContainer/ss/PanelContainer/VBoxContainer/+1 Def btn" to="." method="_on_level_up_option_selected"]
 [connection signal="level_up_option_selected" from="VBoxContainer/ss/PanelContainer/VBoxContainer/+10 Max HP btn" to="." method="_on_level_up_option_selected"]
+[connection signal="level_up_option_selected" from="VBoxContainer/ss/PanelContainer/VBoxContainer/Water Jet" to="." method="_on_level_up_option_selected"]

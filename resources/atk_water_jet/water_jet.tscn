@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2507msycfbgq"]
+
+[ext_resource type="Script" path="res://resources/atk_water_jet/water_jet.gd" id="1_aekfa"]
+[ext_resource type="Texture2D" uid="uid://cr1dsdvjykf1g" path="res://resources/atk_water_jet/water_slash/1.png" id="2_4oq85"]
+[ext_resource type="Texture2D" uid="uid://v325nqnu7l12" path="res://resources/atk_water_jet/water_slash/2.png" id="3_vt62t"]
+[ext_resource type="Texture2D" uid="uid://daf24o3v4lqxv" path="res://resources/atk_water_jet/water_slash/3.png" id="4_ki3mk"]
+[ext_resource type="Texture2D" uid="uid://c85675bw4r37l" path="res://resources/atk_water_jet/water_slash/4.png" id="5_jqoa1"]
+[ext_resource type="Texture2D" uid="uid://dl5lvlu7ryqnp" path="res://resources/atk_water_jet/water_slash/5.png" id="6_4qyrt"]
+[ext_resource type="Texture2D" uid="uid://cgoycemard7cr" path="res://resources/atk_water_jet/water_slash/6.png" id="7_smt7a"]
+[ext_resource type="Texture2D" uid="uid://c8ol7paeevfps" path="res://resources/atk_water_jet/water_slash/7.png" id="8_6ywr6"]
+[ext_resource type="Texture2D" uid="uid://bpgc6vhoiw2kf" path="res://resources/atk_water_jet/water_slash/8.png" id="9_q6cia"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tf7hd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4oq85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vt62t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ki3mk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jqoa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4qyrt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_smt7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6ywr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_q6cia")
+}],
+"loop": true,
+"name": &"default",
+"speed": 25.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmb4x"]
+size = Vector2(20, 95)
+
+[node name="WaterJet" type="Node2D"]
+script = ExtResource("1_aekfa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(124, -20)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_tf7hd")
+frame_progress = 0.0831794
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(8, -1)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_lmb4x")
+target_position = Vector2(468, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

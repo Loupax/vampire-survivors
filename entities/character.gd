@@ -12,13 +12,16 @@ signal damage_inflicted(who: Character, damage: int)
 
 var atk_multiplier:float = 1
 var damage_reduction:float = 0
+var flip_h:bool = false
 
 
 func _process(_delta: float) -> void:
 	if velocity.x > 0:
-		animation.scale.x = -1
+		animation.flip_h = true
+		flip_h = true
 	if velocity.x < 0:
-		animation.scale.x = 1
+		animation.flip_h = false
+		flip_h = false 
 		
 	if velocity != Vector2(0,0):
 		animation.play("walk")
@@ -27,6 +30,12 @@ func _process(_delta: float) -> void:
 	
 func _physics_process(delta: float) -> void:
 	move_and_slide()
+
+func add_child_scene(i: LevelUpOption):
+	var child = i.child_scene.instantiate()
+	if child.has_method("set_attacker"):
+		child.set_attacker(self)
+	add_child(child)
 		
 func resolve_attack(attacker: Character, receiver: Character, dmg: int):
 	var dmg_dealt = int(round(dmg * attacker.atk_multiplier))

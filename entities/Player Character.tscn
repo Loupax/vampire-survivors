@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://g5vun8m7do0r"]
+[gd_scene load_steps=16 format=3 uid="uid://g5vun8m7do0r"]
 
 [ext_resource type="Script" path="res://entities/player_character.gd" id="1_76s61"]
 [ext_resource type="Texture2D" uid="uid://3dtvhnrekt2" path="res://entities/baby_dragon/outline/IDLE.png" id="2_gqnqk"]
 [ext_resource type="Texture2D" uid="uid://4wwbuyovdqsq" path="res://entities/baby_dragon/outline/MOVE.png" id="2_s1doq"]
 [ext_resource type="PackedScene" uid="uid://dqmd57uqgaeu7" path="res://collisions/Hitbox.tscn" id="3_pem7a"]
-[ext_resource type="PackedScene" uid="uid://cau0g8el71wd7" path="res://attacks/hitscan.tscn" id="4_plypo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_myydx"]
 atlas = ExtResource("2_gqnqk")
@@ -85,11 +84,6 @@ position = Vector2(2, -18)
 sprite_frames = SubResource("SpriteFrames_srpue")
 animation = &"idle"
 metadata/_edit_lock_ = true
-
-[node name="WaterSlash" parent="AnimatedSprite2D" node_paths=PackedStringArray("attacker") instance=ExtResource("4_plypo")]
-position = Vector2(-94, -7)
-scale = Vector2(-0.31, 0.31)
-attacker = NodePath("../..")
 
 [node name="Hitbox" parent="." instance=ExtResource("3_pem7a")]
 position = Vector2(-10, -8)

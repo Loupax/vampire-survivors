@@ -1,8 +1,17 @@
-class_name HitscanAttack
+class_name WaterJet
 extends Node2D
 @onready var animation:AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray:ShapeCast2D = $ShapeCast2D
-@export var attacker:Node2D
+var attacker:Node2D
+
+func set_attacker(who:Node2D):
+	attacker = who
+
+func _process(delta: float) -> void:
+	if attacker.flip_h:
+		scale.x = abs(scale.x) * 1
+	else:
+		scale.x = abs(scale.x) * -1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Hide the sprite initially

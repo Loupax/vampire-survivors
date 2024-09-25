@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dw02qo5oxy5xc"]
+
+[ext_resource type="PackedScene" uid="uid://b2507msycfbgq" path="res://resources/atk_water_jet/water_jet.tscn" id="1_wo84c"]
+
+[sub_resource type="GDScript" id="GDScript_jvphp"]
+script/source = "extends LevelUpOption
+
+func level_up(who:Character):
+	who.add_child_scene(self)
+"
+
+[resource]
+script = SubResource("GDScript_jvphp")
+name = "Water Jet"
+child_scene = ExtResource("1_wo84c")
